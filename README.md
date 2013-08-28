@@ -20,3 +20,5 @@ echo '++++++++++[>+fgd++++++>++++++++++>+++>dfgdgdf+<<<<-]>++.>     +.+++++++..+
 
 will print:
 Hello World!
+
+(echo 'Hello World!' will also do exactly the same but far less stylishly)
