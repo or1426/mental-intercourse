@@ -2,6 +2,13 @@ mental-intercourse
 ==================
 
 A python (although not very pythonic) brainfuck implementation. 
+
+Brainfuck 
+----------
+http://en.wikipedia.org/wiki/Brainfuck
+
+Usage
+------
 On unix just:
 
 echo 'BRAINFUCK' | python mental-intercourse 
