@@ -7,7 +7,9 @@ On unix just:
 echo 'BRAINFUCK' | python mental-intercourse 
 
 or:
+
 chmod u+x mental-intercourse
+
 echo 'BRAINFUCK' | ./mental-intercourse 
 
 If the second one gives weird errors check where your python is and change the top comment if required
