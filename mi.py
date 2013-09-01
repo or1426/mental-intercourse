@@ -7,7 +7,7 @@ import sys; #for stdin and stdout
 
 #initalise array, pointer and the bracket "stack"                                                                                                                                               
 arraySize = 30000 #this is in the "spec"...                                                                               
-ptr = 0
+ptr = 0 #where we are in the array
 array = [0] * arraySize
 
 #define functions
@@ -52,12 +52,12 @@ opDictionary = {'>': incPtr,
                ']': loopEnd
                }
 
-inString = sys.stdin.readline()
-tape = list(inString)
+tape = sys.stdin.readline() 
 
-openingBracketStack = []
-bracketMap = []
+openingBracketStack = [] 
+bracketMap = [] #list of startBracket, endBracket touples so we can match them
 
+#its really annoying that we have to read the list twice *sad face*
 for i, char in enumerate(tape):
     if char == '[':
         openingBracketStack.append(i)
