@@ -1,16 +1,17 @@
-#! /usr/bin/python                                                                                                                                                                                                                                                                                                                                                                                         
-# A fairly unpythonic brainfuck implementation                                                                                                                                                                                                                                                                                                                                                             
-# I'm not very happy with the global variables                                                                                                                                                                                                                                                                                                                                                             
-# and the use of the integer i is vaugely evil                                                                                                                                                                                                                                                                                                                                                             
-import sys; #for stdin and stdout                                                                                                                                                                                                                                                                                                                                                                          
+#! /usr/bin/python
+# A fairly unpythonic brainfuck implementation
+# I'm not very happy with the global variables
+# and the use of the integer tapePtr is vaugely evil
 
-#initalise array, pointer and the bracket "stack"                                                                                                                                                                                                                                                                                                                                                          
-arraySize = 30000 #this is in the "spec"...                                                                                                                                                                                                                                                                                                                                                                
+import sys; #for stdin and stdout                                                                                                                                                                   
+
+#initalise array, pointer and the bracket "stack"                                                                                                                                               
+arraySize = 30000 #this is in the "spec"...                                                                               
 ptr = 0
 array = [0] * arraySize
-bracketStack = []
 
-#define functions                                                                                                                                                                                                                                                                                                                                                                                          
+#define functions
+
 def incPtr():
     global ptr, array
     ptr += 1
@@ -30,14 +31,16 @@ def getEle():
     global ptr,array
     array[ptr] = ord(sys.stdin.read(1))
 def loopStart():
-    global ptr,array,bracketStack,i
-    bracketStack.append(i)
+    global ptr,array,bracketMap,tapePtr
+    if array[ptr] == 0:
+        for start,end in bracketMap:
+            if start == tapePtr:
+                tapePtr = end
 def loopEnd():
-    global ptr,bracketStack,i
-    if array[ptr] > 0:
-        i = bracketStack[-1]
-    else:
-        bracketStack.pop()
+    global ptr,bracketMap,tapePtr
+    for start,end in bracketMap:
+        if tapePtr == end:
+            tapePtr = start - 1
 
 opDictionary = {'>': incPtr,
                '<': decPtr,
@@ -50,11 +53,22 @@ opDictionary = {'>': incPtr,
                }
 
 inString = sys.stdin.readline()
-inList = list(inString)
+tape = list(inString)
 
-#the unpythonic i makes the [ and ] based loops easier                                                                                                                                                                                                                                                                                                                                                     
-i = 0
-while i < len(inList) - 1:
-    if inList[i] in opDictionary.keys():
-        opDictionary[inList[i]]()
-    i += 1
+openingBracketStack = []
+bracketMap = []
+
+for i, char in enumerate(tape):
+    if char == '[':
+        openingBracketStack.append(i)
+    elif char == ']':
+        matchingOpeningBracket = openingBracketStack.pop()
+        touple = matchingOpeningBracket, i
+        bracketMap.append(touple)
+
+#the unpythonic tapePtr makes the [ ] loops easier
+tapePtr = 0
+while tapePtr < len(tape) - 1:
+    if tape[tapePtr] in opDictionary.keys():
+        opDictionary[tape[tapePtr]]()
+    tapePtr += 1
