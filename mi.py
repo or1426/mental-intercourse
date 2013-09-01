@@ -52,7 +52,7 @@ opDictionary = {'>': incPtr,
                ']': loopEnd
                }
 
-tape = sys.stdin.readline() 
+tape = sys.stdin.read() 
 
 openingBracketStack = [] 
 bracketMap = [] #list of startBracket, endBracket touples so we can match them
