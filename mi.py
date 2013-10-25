@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#! /usr/bin/env python
 # A fairly unpythonic brainfuck implementation
 # I'm not very happy with the global variables
 # and the use of the integer tapePtr is vaugely evil
