@@ -5,7 +5,7 @@
 
 import sys; #for stdin and stdout                                                                                                                                                                   
 
-#initalise array, pointer and the bracket "stack"                                                                                                                                               
+#initalise array and pointer                                                                                                                                             
 arraySize = 30000 #this is in the "spec"...                                                                               
 ptr = 0 #where we are in the array
 array = [0] * arraySize
